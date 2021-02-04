@@ -1,0 +1,17 @@
+{
+  "type": "mysql",
+  "host": "remotemysql.com",
+  "port": 3306,
+  "username": "lhagZnBmco",
+  "password": "NlPLGC9gQF",
+  "database": "lhagZnBmco",
+  "migrations": [
+    "./src/database/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  },
+  "entities": [
+    "./src/models/*.ts"
+  ]
+}
