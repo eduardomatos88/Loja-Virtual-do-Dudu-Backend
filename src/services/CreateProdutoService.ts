@@ -25,7 +25,6 @@ class CreateProdutoService {
     quantidade_fotos,
   }: IRequest): Promise<Produto> {
     const produtoRepository = getRepository(Produto)
-    // Melhorar essa verificação
     const existeProduto = await produtoRepository.findOne({
       nome,
       marca_id,
@@ -34,7 +33,7 @@ class CreateProdutoService {
     if (existeProduto) {
       throw new Error('Produto já existe')
     }
-    const marca = produtoRepository.create({
+    const produto = produtoRepository.create({
       nome,
       descricao,
       valor,
@@ -44,8 +43,8 @@ class CreateProdutoService {
       local_saida,
       quantidade_fotos,
     })
-    await produtoRepository.save(marca)
-    return marca
+    await produtoRepository.save(produto)
+    return produto
   }
 }
 

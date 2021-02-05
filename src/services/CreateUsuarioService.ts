@@ -1,4 +1,5 @@
 import { getRepository } from 'typeorm'
+import { hash } from 'bcryptjs'
 
 import Usuario from '../models/Usuario'
 
@@ -13,11 +14,17 @@ class CreateUsuarioService {
     const usuariosRepository = getRepository(Usuario)
     const existeUsuario = await usuariosRepository.findOne({ email })
     if (existeUsuario) {
-      throw new Error('Usuário já existe')
+      throw new Error('Email já cadastrado')
     }
-    const marca = usuariosRepository.create({ nome, email, senha })
-    await usuariosRepository.save(marca)
-    return marca
+    const hashedSenha = await hash(senha, 10)
+    const usuario = usuariosRepository.create({
+      nome,
+      email,
+      senha: hashedSenha,
+    })
+    await usuariosRepository.save(usuario)
+    delete usuario.senha
+    return usuario
   }
 }
 

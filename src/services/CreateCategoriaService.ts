@@ -14,9 +14,9 @@ class CreateCategoriaService {
     if (existeCategoria) {
       throw new Error('Categoria já existe')
     }
-    const marca = categoriasRepository.create({ nome, descricao })
-    await categoriasRepository.save(marca)
-    return marca
+    const categoria = categoriasRepository.create({ nome, descricao })
+    await categoriasRepository.save(categoria)
+    return categoria
   }
 }
 
